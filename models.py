@@ -11,7 +11,11 @@ class RobertaBase(transformers.BertPreTrainedModel):
     def __init__(self, conf):
         super(RobertaBase, self).__init__(conf)
         
-        self.roberta = transformers.RobertaModel.from_pretrained(ROBERTA_PATH, config=conf)
+        if (conf.hidden_size==1024):
+           self.roberta = transformers.RobertaModel.from_pretrained('roberta-large', config=conf)
+        else:
+           self.roberta = transformers.RobertaModel.from_pretrained(ROBERTA_PATH, config=conf)
+
         
         self.drop_out = nn.Dropout(0.5)
 
@@ -31,10 +35,8 @@ class RobertaBase(transformers.BertPreTrainedModel):
         logits = torch.mean(
             torch.stack(
                 [self.l0(self.drop_out(out)) for _ in range(5)],
-                dim=0,
-            ),
-            dim=0,
-        )
+                dim=0,),
+                dim=0,)
 
         start_logits, end_logits = logits.split(1, dim=-1)
 

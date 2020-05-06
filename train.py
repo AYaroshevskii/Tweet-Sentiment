@@ -23,14 +23,14 @@ parser.add_argument("--model_type", type=str, default='small')
 parser.add_argument("--fold", type=int, default=0)
 parser.add_argument("--num_folds", type=int, default=10)
 parser.add_argument("--batch_size", type=int, default=32)
-parser.add_argument("--max_epoch", type=int, default=6)
+parser.add_argument("--max_epoch", type=int, default=5)
 parser.add_argument("--start_epoch", type=int, default=0)
 parser.add_argument("--seed", type=int, default=123)
-parser.add_argument("--device", type=str, default="cuda")
+parser.add_argument("--device", type=str, default="cpu")
 parser.add_argument("--warmup", type=int, default=300)
 parser.add_argument("--start_decay", type=int, default=1)
 parser.add_argument("--lr_gamma", type=float, default=0.5)
-parser.add_argument("--steps_eval", type=int, default=50)
+parser.add_argument("--steps_eval", type=int, default=100)
 parser.add_argument("--pseudo_labels", type=bool, default=False)
 args = parser.parse_args()
 
@@ -78,21 +78,24 @@ valid_df = df.iloc[test_index]
 df = df.iloc[train_index]
 
 if (PSEUDO_LABELS):
-    df = pd.concat([df, pd.read_csv('data/PseudoLabels.csv')], axis=0, sort=True)
+    ps_labels = pd.read_csv('data/PseudoLabels.csv')
+    for idx_fold, (train_index, test_index) in enumerate(skf.split(ps_labels, ps_labels.sentiment)):
+        if idx_fold==FOLD: break
+    
+    ps_labels = ps_labels.iloc[test_index]
+    df = pd.concat([df, ps_labels], axis=0, sort=True)
 
 
 # Create dataset objects
 train_dataset = TweetDataset(
         tweet=df.text.values,
         sentiment=df.sentiment.values,
-        selected_text=df.selected_text.values
-    )
+        selected_text=df.selected_text.values)
 
 valid_dataset = TweetDataset(
         tweet=valid_df.text.values,
         sentiment=valid_df.sentiment.values,
-        selected_text=valid_df.selected_text.values
-    )
+        selected_text=valid_df.selected_text.values)
 
 train_data_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE,
                                shuffle=True, num_workers=4,
@@ -126,21 +129,11 @@ optimizer = torch.optim.AdamW(model.parameters(),
                               eps = 1e-8)
 
 scheduler = get_constant_schedule_with_warmup(optimizer, 
-                                            num_warmup_steps=WARMUP)
+                                              num_warmup_steps=WARMUP)
 
 scheduler_decay = torch.optim.lr_scheduler.StepLR(optimizer,
                                                   step_size=1,
                                                   gamma=LR_GAMMA)
-
-# Fine-tuning with pseudo-labels
-if (PSEUDO_LABELS):
-    load_checkpoint('Models/model{}.pth'.format(FOLD), model, None)
-    optimizer = torch.optim.AdamW(model.parameters(),
-                              lr = 1e-6,
-                              eps = 1e-8)
-    START_DECAY = NUM_EPOCH+1
-    START_EPOCH = 1
-    NUM_EPOCH = START_EPOCH+2
 
 # Train
 for epoch in range(START_EPOCH, NUM_EPOCH):
