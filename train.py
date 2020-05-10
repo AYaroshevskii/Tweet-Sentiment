@@ -18,16 +18,16 @@ from tqdm import tqdm
 import string
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model", type=str, default="RoBerta")
-parser.add_argument("--model_type", type=str, default='small')
+parser.add_argument("--model_name", type=str, default='distilroberta-base')
 parser.add_argument("--fold", type=int, default=0)
-parser.add_argument("--num_folds", type=int, default=10)
+parser.add_argument("--num_folds", type=int, default=5)
 parser.add_argument("--batch_size", type=int, default=32)
-parser.add_argument("--max_epoch", type=int, default=5)
+parser.add_argument("--max_epoch", type=int, default=6)
 parser.add_argument("--start_epoch", type=int, default=0)
 parser.add_argument("--seed", type=int, default=123)
-parser.add_argument("--device", type=str, default="cpu")
+parser.add_argument("--device", type=str, default="cuda")
 parser.add_argument("--warmup", type=int, default=300)
+parser.add_argument('--start_lr', type=int, default=2)
 parser.add_argument("--start_decay", type=int, default=1)
 parser.add_argument("--lr_gamma", type=float, default=0.5)
 parser.add_argument("--steps_eval", type=int, default=100)
@@ -37,8 +37,7 @@ args = parser.parse_args()
 print (args)
 
 # Argument parser
-MODEL_NAME=args.model 
-MODEL_TYPE=args.model_type
+MODEL_NAME=args.model_name
 
 START_EPOCH=args.start_epoch
 NUM_EPOCH=args.max_epoch
@@ -48,6 +47,7 @@ FOLD=args.fold
 NUM_FOLDS=args.num_folds
 SEED=args.seed
 
+START_LR=args.start_lr
 WARMUP=args.warmup
 START_DECAY=args.start_decay
 LR_GAMMA=args.lr_gamma
@@ -67,6 +67,13 @@ np.random.seed(SEED)
 random.seed(SEED)
 def _worker_init_fn(worker_id):
     np.random.seed(worker_id)
+
+# TOKENIZER
+TOKENIZER = tokenizers.ByteLevelBPETokenizer(
+    vocab_file=f"configs/{MODEL_NAME}/vocab.json", 
+    merges_file=f"configs/{MODEL_NAME}/merges.txt", 
+    lowercase=True,
+    add_prefix_space=True)
 
 # KFOLD split
 skf = StratifiedKFold(n_splits=NUM_FOLDS, shuffle=True, random_state=SEED)
@@ -90,12 +97,14 @@ if (PSEUDO_LABELS):
 train_dataset = TweetDataset(
         tweet=df.text.values,
         sentiment=df.sentiment.values,
-        selected_text=df.selected_text.values)
+        selected_text=df.selected_text.values,
+        tokenizer=TOKENIZER)
 
 valid_dataset = TweetDataset(
         tweet=valid_df.text.values,
         sentiment=valid_df.sentiment.values,
-        selected_text=valid_df.selected_text.values)
+        selected_text=valid_df.selected_text.values,
+        tokenizer=TOKENIZER)
 
 train_data_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE,
                                shuffle=True, num_workers=4,
@@ -108,24 +117,13 @@ valid_data_loader = DataLoader(valid_dataset, batch_size=BATCH_SIZE,
 # Create Model
 device = torch.device(args.device)
 
-if (MODEL_NAME == 'RoBerta'):
-    model_config = transformers.RobertaConfig.from_pretrained(ROBERTA_PATH)
-    
-    if (MODEL_TYPE == 'small'):
-        model_config.output_hidden_states = True
+model_config = CONFIG[MODEL_NAME](MODEL_NAME)
 
-    else: #LARGE
-        model_config.num_attention_heads = 16
-        model_config.num_hidden_layers = 24
-        model_config.intermediate_size = 4096
-        model_config.hidden_size = 1024
-        model_config.output_hidden_states = True
-    
-    model = RobertaBase(conf=model_config).to(device)
+model = ModelBase(conf=model_config, model_name=MODEL_NAME).to(device)
 
 # Set optimizers
 optimizer = torch.optim.AdamW(model.parameters(),
-                              lr = 2e-5,
+                              lr = START_LR*1e-5,
                               eps = 1e-8)
 
 scheduler = get_constant_schedule_with_warmup(optimizer, 
@@ -155,7 +153,7 @@ for epoch in range(START_EPOCH, NUM_EPOCH):
         
             if mean_jac_score > TOTAL_SCORE:
                 TOTAL_SCORE = mean_jac_score
-                save_checkpoint('Models/{}model{}.pth'.format(MODEL_TYPE, FOLD), model, optimizer)
+                save_checkpoint('Models/{}{}.pth'.format(MODEL_NAME, FOLD), model, optimizer)
 
             print ("EPOCH: {}, STEP: {}".format(epoch, step))
             print("Train Loss : {}, Validation Jac Score : {}".format(

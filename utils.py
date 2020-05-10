@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.pyplot import imread
 import torch
+import transformers
 
 ROBERTA_PATH = "roberta-base"
 
@@ -34,3 +35,17 @@ def sentiment_to_class(s):
         return 0
     if s == 'positive':
         return 2
+
+CONFIG = {'roberta-base': transformers.RobertaConfig.from_pretrained,
+           'roberta-large': transformers.RobertaConfig.from_pretrained,
+           'distilroberta-base': transformers.RobertaConfig.from_pretrained,
+           "roberta-base-openai-detector": transformers.RobertaConfig.from_pretrained,
+           "gpt2": transformers.GPT2Config.from_pretrained,
+           "gpt2-medium": transformers.GPT2Config.from_pretrained}
+
+MODELS = {'roberta-base': transformers.RobertaModel.from_pretrained,
+          'roberta-large': transformers.RobertaModel.from_pretrained,
+          'distilroberta-base': transformers.RobertaModel.from_pretrained,
+          "roberta-base-openai-detector": transformers.RobertaModel.from_pretrained,
+          "gpt2": transformers.GPT2Model.from_pretrained,
+          "gpt2-medium": transformers.GPT2Model.from_pretrained}

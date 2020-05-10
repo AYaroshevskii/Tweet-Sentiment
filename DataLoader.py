@@ -12,12 +12,6 @@ df.loc[:,'sentiment'] = df.sentiment.apply(lambda x : sentiment_to_class(x))
 
 MAX_LEN = 192
 
-TOKENIZER = tokenizers.ByteLevelBPETokenizer(
-    vocab_file=f"{ROBERTA_PATH}/vocab.json", 
-    merges_file=f"{ROBERTA_PATH}/merges.txt", 
-    lowercase=True,
-    add_prefix_space=True)
-
 def process_data(tweet, selected_text, sentiment, tokenizer, max_len):
     tweet = " " + " ".join(str(tweet).split())
     selected_text = " " + " ".join(str(selected_text).split())
@@ -78,11 +72,11 @@ def process_data(tweet, selected_text, sentiment, tokenizer, max_len):
            }
 
 class TweetDataset:
-    def __init__(self, tweet, sentiment, selected_text):
+    def __init__(self, tweet, sentiment, selected_text, tokenizer):
         self.tweet = tweet
         self.sentiment = sentiment
         self.selected_text = selected_text
-        self.tokenizer = TOKENIZER
+        self.tokenizer = tokenizer
         self.max_len = MAX_LEN
     
     def __len__(self):

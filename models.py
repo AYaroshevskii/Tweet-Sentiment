@@ -7,15 +7,11 @@ import transformers
 from utils import *
 
 
-class RobertaBase(transformers.BertPreTrainedModel):
-    def __init__(self, conf):
-        super(RobertaBase, self).__init__(conf)
-        
-        if (conf.hidden_size==1024):
-           self.roberta = transformers.RobertaModel.from_pretrained('roberta-large', config=conf)
-        else:
-           self.roberta = transformers.RobertaModel.from_pretrained(ROBERTA_PATH, config=conf)
+class ModelBase(transformers.BertPreTrainedModel):
+    def __init__(self, conf, model_name):
+        super(ModelBase, self).__init__(conf)
 
+        self.backbone = MODELS[model_name](model_name, output_hidden_states=True)
         
         self.drop_out = nn.Dropout(0.5)
 
@@ -24,8 +20,7 @@ class RobertaBase(transformers.BertPreTrainedModel):
         torch.nn.init.normal_(self.l0.weight, std=0.02)
     
     def forward(self, ids, mask, token_type_ids):
-        
-        _, _, out = self.roberta(
+        _, _, out = self.backbone(
             ids,
             attention_mask=mask,
             token_type_ids=token_type_ids

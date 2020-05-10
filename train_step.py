@@ -10,7 +10,7 @@ def train(model, d, optimizer, device):
         mask = d["mask"].to(device, dtype=torch.long)
         targets_start = d["targets_start"].to(device, dtype=torch.long)
         targets_end = d["targets_end"].to(device, dtype=torch.long)
-
+        
         outputs_start, outputs_end = model(
             ids=ids,
             mask=mask,
@@ -20,6 +20,7 @@ def train(model, d, optimizer, device):
         loss2 = loss_ce(outputs_end, targets_end)
         
         loss = 0.5*loss1 + 0.5*loss2
+
         
         optimizer.zero_grad()
         loss.backward()
