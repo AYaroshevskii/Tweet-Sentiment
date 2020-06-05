@@ -18,20 +18,21 @@ from tqdm import tqdm
 import string
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_name", type=str, default='distilroberta-base')
+parser.add_argument("--model_name", type=str, default='roberta-base')
 parser.add_argument("--fold", type=int, default=0)
-parser.add_argument("--num_folds", type=int, default=5)
+parser.add_argument("--num_folds", type=int, default=10)
 parser.add_argument("--batch_size", type=int, default=32)
-parser.add_argument("--max_epoch", type=int, default=6)
+parser.add_argument("--max_epoch", type=int, default=4)
 parser.add_argument("--start_epoch", type=int, default=0)
-parser.add_argument("--seed", type=int, default=123)
+parser.add_argument("--seed", type=int, default=1111)
 parser.add_argument("--device", type=str, default="cuda")
 parser.add_argument("--warmup", type=int, default=300)
 parser.add_argument('--start_lr', type=int, default=2)
 parser.add_argument("--start_decay", type=int, default=1)
 parser.add_argument("--lr_gamma", type=float, default=0.5)
-parser.add_argument("--steps_eval", type=int, default=100)
-parser.add_argument("--pseudo_labels", type=bool, default=False)
+parser.add_argument("--steps_eval", type=int, default=5)
+parser.add_argument("--pseudo_labels", type=bool, default=True)
+parser.add_argument("--frac", type=float, default=0.5)
 args = parser.parse_args()
 
 print (args)
@@ -54,7 +55,7 @@ LR_GAMMA=args.lr_gamma
 STEPS_EVAL=args.steps_eval
 
 PSEUDO_LABELS=args.pseudo_labels
-
+PS_FRACTION=args.frac
 TOTAL_SCORE=0
 
 # SEED BLOCK
@@ -70,8 +71,8 @@ def _worker_init_fn(worker_id):
 
 # TOKENIZER
 TOKENIZER = tokenizers.ByteLevelBPETokenizer(
-    vocab_file=f"configs/{MODEL_NAME}/vocab.json", 
-    merges_file=f"configs/{MODEL_NAME}/merges.txt", 
+    vocab_file=f"configs/{MODEL_NAME}/vocab.json",
+    merges_file=f"configs/{MODEL_NAME}/merges.txt",
     lowercase=True,
     add_prefix_space=True)
 
@@ -80,16 +81,17 @@ skf = StratifiedKFold(n_splits=NUM_FOLDS, shuffle=True, random_state=SEED)
 
 for idx_fold, (train_index, test_index) in enumerate(skf.split(df, df.sentiment)):
     if idx_fold==FOLD: break
-        
+
 valid_df = df.iloc[test_index]
 df = df.iloc[train_index]
 
 if (PSEUDO_LABELS):
-    ps_labels = pd.read_csv('data/PseudoLabels.csv')
+    ps_labels = pd.read_csv('data/PSLabels.csv')
     for idx_fold, (train_index, test_index) in enumerate(skf.split(ps_labels, ps_labels.sentiment)):
         if idx_fold==FOLD: break
-    
+
     ps_labels = ps_labels.iloc[test_index]
+    ps_labels = ps_labels.sample(frac=PS_FRACTION, random_state=SEED)
     df = pd.concat([df, ps_labels], axis=0, sort=True)
 
 
@@ -126,7 +128,7 @@ optimizer = torch.optim.AdamW(model.parameters(),
                               lr = START_LR*1e-5,
                               eps = 1e-8)
 
-scheduler = get_constant_schedule_with_warmup(optimizer, 
+scheduler = get_constant_schedule_with_warmup(optimizer,
                                               num_warmup_steps=WARMUP)
 
 scheduler_decay = torch.optim.lr_scheduler.StepLR(optimizer,

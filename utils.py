@@ -26,7 +26,7 @@ def load_checkpoint(checkpoint_path, model, optimizer):
     print("model loaded from %s" % checkpoint_path)
 
 def validation_time(step, steps_eval, epoch, n_valid):
-    return  (step%steps_eval == 0 and epoch > 0 and step > 0) or (step+1==n_valid)
+    return  (step%steps_eval == 0 and epoch > 1 and step > 0) or (step+1==n_valid)
 
 def sentiment_to_class(s):
     if s == 'neutral':

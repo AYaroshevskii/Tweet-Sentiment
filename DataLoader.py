@@ -30,7 +30,9 @@ def process_data(tweet, selected_text, sentiment, tokenizer, max_len):
     if idx0 != None and idx1 != None:
         for ct in range(idx0, idx1 + 1):
             char_targets[ct] = 1
-    
+    else:
+        return None
+
     tok_tweet = tokenizer.encode(tweet)
     input_ids_orig = tok_tweet.ids
     tweet_offsets = tok_tweet.offsets
