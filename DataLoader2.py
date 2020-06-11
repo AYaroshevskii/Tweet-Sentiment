@@ -18,8 +18,8 @@ def find(s, ch):
     return [i for i, ltr in enumerate(s) if ltr == ch]
 
 def process_data(tweet, selected_text, sentiment, tokenizer, max_len, train=True):
-    tweet = " " + str(tweet)
-    selected_text = " " + str(selected_text)
+    tweet = " " + " ".join(str(tweet).split())
+    selected_text = " " + " ".join(str(selected_text).split())
 
     len_st = len(selected_text) - 1
     idx0 = None

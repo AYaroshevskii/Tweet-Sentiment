@@ -96,13 +96,12 @@ def correct(x):
     
     return x.text[max(idx0+offset, 0): idx0+offset+len(x.selected_text)]
 df = df.dropna()
-##df["selected_text_old"] = df.selected_text
 #df["selected_text"] = df.apply(lambda x: correct(x), axis=1).str.strip()
 
 failed_start = df.apply(lambda row: find_failed_start(row.text, row.selected_text),axis=1)
 failed_end = df.apply(lambda row: find_failed_end(row.text, row.selected_text),axis=1)
-df = df[(~failed_start) & (~failed_end) & (~(df.selected_text == ""))]
-
+df = df[~((~failed_start) & (~failed_end) & (~(df.selected_text == "")))]
+print(df.shape)
 
 START = np.zeros((len(df), MAX_LEN))
 END = np.zeros((len(df), MAX_LEN))
@@ -110,6 +109,9 @@ END = np.zeros((len(df), MAX_LEN))
 # KFOLD split
 skf = StratifiedKFold(n_splits=NUM_FOLDS, shuffle=True, random_state=SEED)
 df["pred"] = None
+orig_tweets_list = []
+offsets_list = []
+sentiment_list = []
 
 for idx_fold, (train_index, test_index) in enumerate(skf.split(df, df.sentiment)):
 
@@ -119,7 +121,7 @@ for idx_fold, (train_index, test_index) in enumerate(skf.split(df, df.sentiment)
 
     FOLD = idx_fold
 
-    valid_df = df.iloc[test_index]
+    valid_df = df#.iloc[test_index]
 
     valid_dataset = TweetDataset(
         tweet=valid_df.text.values,
@@ -167,21 +169,40 @@ for idx_fold, (train_index, test_index) in enumerate(skf.split(df, df.sentiment)
         start_pr.extend(outputs_start)
         end_pr.extend(outputs_end)
 
-        for px, tweet in enumerate(orig_tweet):
-            tweet_sentiment = sentiment[px]
+        orig_tweets_list.extend(orig_tweet)
+        offsets_list.extend(offsets)
+        sentiment_list.extend(sentiment)
+        # for px, tweet in enumerate(orig_tweet):
+        #     tweet_sentiment = sentiment[px]
 
-            res_text = get_selected_string(
-                original_tweet=tweet,
-                sentiment_val=tweet_sentiment,
-                idx_start=np.argmax(outputs_start[px, :]),
-                idx_end=np.argmax(outputs_end[px, np.argmax(outputs_start[px, :]):]) + np.argmax(outputs_start[px, :]),
-                offsets=offsets[px])
-            text_results.append(res_text)
+        #     res_text = get_selected_string(
+        #         original_tweet=tweet,
+        #         sentiment_val=tweet_sentiment,
+        #         idx_start=np.argmax(outputs_start[px, :]),
+        #         idx_end=np.argmax(outputs_end[px, np.argmax(outputs_start[px, :]):]) + np.argmax(outputs_start[px, :]),
+        #         offsets=offsets[px])
+        #     text_results.append(res_text)
 
-    START[test_index] = np.array(start_pr)
-    END[test_index] = np.array(end_pr)
-    df.iloc[test_index, df.columns.get_loc("pred")] = text_results
+    START += np.array(start_pr) / 5
+    END += np.array(end_pr) / 5
 
-np.save("../oof/oof_start_{}.npy".format(args.key), START)
-np.save("../oof/oof_end_{}.npy".format(args.key), END)
-df.to_csv("../oof/oof_{}.csv".format(args.key), index=None)
+print(START.shape)
+text_results = []
+for px in range(len(START)):
+    #for px, tweet in enumerate(orig_tweets_list):
+    tweet_sentiment = sentiment_list[px]
+    tweet = orig_tweets_list[px]
+
+    res_text = get_selected_string(
+        original_tweet=tweet,
+        sentiment_val=tweet_sentiment,
+        idx_start=np.argmax(START[px, :]),
+        idx_end=np.argmax(END[px, np.argmax(START[px, :]):]) + np.argmax(START[px, :]),
+        offsets=offsets_list[px])
+    text_results.append(res_text)
+    
+df["pred"] = text_results
+
+#np.save("../oof/oof_start_{}.npy".format(args.key), START)
+#np.save("../oof/oof_end_{}.npy".format(args.key), END)
+df.to_csv("../oof/oof_{}_rest.csv".format(args.key), index=None)

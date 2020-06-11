@@ -1,5 +1,5 @@
 from models_all import *
-from DataLoader2 import *
+from DataLoader import *
 from utils import *
 from criterion import *
 from train_step import *
@@ -85,11 +85,7 @@ TOKENIZER = tokenizers.ByteLevelBPETokenizer(
 # KFOLD split
 skf = StratifiedKFold(n_splits=NUM_FOLDS, shuffle=True, random_state=SEED)
 
-for idx_fold, (train_index, test_index) in enumerate(skf.split(df, df.sentiment)):
-    if idx_fold == FOLD:
-        break
 
-valid_df = df.iloc[test_index]
 
 def find_failed_start(text, selected_text):
     """find the case that lable is not truncated by space"""
@@ -106,8 +102,6 @@ def find_failed_end(text,selected_text):
     if end == len(text):
         return False
     return text[end].isalpha()
-
-train_df = df.iloc[train_index]#.dropna()
 
 def spaces_offset(x):
     while x.endswith(' '):
@@ -131,12 +125,20 @@ def correct(x):
         offset -=1
     
     return x.text[max(idx0+offset, 0): idx0+offset+len(x.selected_text)]
+df = df.dropna()
+#df["selected_text"] = df.apply(lambda x: correct(x), axis=1).str.strip()
 
-# train_df["selected_text"] = train_df.apply(lambda x: correct(x), axis=1).str.strip()
+failed_start = df.apply(lambda row: find_failed_start(row.text, row.selected_text),axis=1)
+failed_end = df.apply(lambda row: find_failed_end(row.text, row.selected_text),axis=1)
+df = df[(~failed_start) & (~failed_end) & (~(df.selected_text == ""))]
 
-# failed_start = train_df.apply(lambda row: find_failed_start(row.text, row.selected_text),axis=1)
-# failed_end = train_df.apply(lambda row: find_failed_end(row.text, row.selected_text),axis=1)
-# train_df = train_df[(~failed_start) & (~failed_end) & (~(train_df.selected_text == ""))]
+for idx_fold, (train_index, test_index) in enumerate(skf.split(df, df.sentiment)):
+    if idx_fold == FOLD:
+        break
+
+valid_df = df.iloc[test_index]
+train_df = df.iloc[train_index].dropna()
+
 
 if PSEUDO_LABELS:
     ps_labels = pd.read_csv("../input/PSLabels.csv")
@@ -157,7 +159,6 @@ train_dataset = TweetDataset(
     sentiment=train_df.sentiment.values,
     selected_text=train_df.selected_text.values,
     tokenizer=TOKENIZER,
-    train=True
 )
 
 valid_dataset = TweetDataset(
@@ -165,7 +166,6 @@ valid_dataset = TweetDataset(
     sentiment=valid_df.sentiment.values,
     selected_text=valid_df.selected_text.values,
     tokenizer=TOKENIZER,
-    train=False
 )
 
 train_data_loader = DataLoader(
@@ -192,9 +192,8 @@ model_config = CONFIG[MODEL_NAME](MODEL_NAME)
 model = ModelBase(conf=model_config, model_name=MODEL_NAME).to(device)
 
 # Set optimizers
-# Set optimizers
 params = list(model.named_parameters())
-
+# Set optimizers
 def is_backbone(n):
         return "backbone" in n
 
@@ -212,9 +211,9 @@ scheduler = get_cosine_schedule_with_warmup(
     num_warmup_steps=WARMUP,
     num_training_steps=688*4)
 
-# scheduler_decay = torch.optim.lr_scheduler.StepLR(
-#     optimizer, step_size=1, gamma=LR_GAMMA
-# )
+scheduler_decay = torch.optim.lr_scheduler.StepLR(
+    optimizer, step_size=1, gamma=LR_GAMMA
+)
 
 # Train
 for epoch in range(START_EPOCH, NUM_EPOCH):

@@ -181,6 +181,7 @@ m ent
 Ġa l
 u st
 en d
+- -
 al l
 Ġ O
 ac k
@@ -234,6 +235,7 @@ ic h
 p l
 t her
 Ġt r
+. .
 Ġin t
 i e
 u re
@@ -267,6 +269,7 @@ i ke
 Ġs o
 im e
 p er
+. "
 b er
 i z
 a ct
@@ -293,6 +296,7 @@ u b
 Ġh ad
 Ġ en
 Ġcom p
+, "
 ĠI n
 Ġu n
 Ġa g
@@ -1278,6 +1282,7 @@ e g
 ou th
 B ut
 ion al
+. ,
 Ġs ol
 Ġal ready
 Ġ3 0
@@ -1439,6 +1444,7 @@ en n
 a id
 iv id
 Ġrec ord
+? "
 Ġs ing
 ĠA m
 id ence
@@ -1751,6 +1757,7 @@ it ch
 ĠM y
 r ict
 i en
+. )
 Ġimp ro
 th ough
 ward s
@@ -2210,6 +2217,7 @@ ent al
 Ġa p
 Ġtot al
 iv al
+! "
 l im
 Ġneed s
 Ġag re
@@ -2372,6 +2380,7 @@ j oy
 Ã ©
 ĠWh ite
 Ġde ad
+. '
 Ġhtt p
 Ġwe bs
 O S
@@ -2962,6 +2971,7 @@ in ary
 ro l
 ĠO f
 Ġprodu ction
+! !
 und red
 Ġintern ational
 id ents
@@ -3281,6 +3291,7 @@ ock ed
 ĠC oun
 I m
 u ild
+? ?
 m ore
 Ġan g
 Ġwr ite
@@ -3288,6 +3299,7 @@ ol ute
 5 7
 Ġlead er
 Ġread ing
+< /
 Ġaut om
 est s
 4 3
@@ -3424,6 +3436,7 @@ ur g
 Ġthrough out
 Ġv s
 ig r
+. [
 ac hes
 7 8
 Ġfil es
@@ -3514,6 +3527,7 @@ it ation
 Ġanal ysis
 ĠT imes
 Ġsc ience
+- >
 Ġfig ure
 Ġdis app
 ent y
@@ -3761,6 +3775,7 @@ ol f
 m l
 Ġke pt
 Ġa im
+, '
 c ol
 Ġbenef its
 if ying
@@ -3939,6 +3954,7 @@ o om
 Ġex erc
 Ġsom ew
 ï ¿½
+> >
 Ġsp okes
 Ġide as
 Ġreg ist
@@ -6654,6 +6670,7 @@ aw a
 Ġmed ic
 he nt
 ĠW omen
+> <
 Ġrepl aced
 ĠP rem
 ĠTh anks
@@ -7391,6 +7408,7 @@ or ia
 Ġe lev
 ĠF ield
 Ġcon clusion
+; ;
 Ġfeel ings
 Ġext ensive
 Ġm ixed
@@ -7599,6 +7617,7 @@ ra ction
 iam i
 Ġy ellow
 ĠP age
+. -
 ĠH as
 Ġur ban
 Ġa x
@@ -7857,6 +7876,7 @@ B ecause
 ak a
 Ġincred ibly
 r ance
+! )
 R ef
 s k
 Ġsol utions
@@ -7906,6 +7926,7 @@ b ow
 ĠInt el
 Ġh ang
 ak i
+. ]
 âĢĶâĢĶ âĢĶâĢĶ
 Ġsur gery
 Ġrep rodu
@@ -8070,6 +8091,7 @@ re c
 ĠE astern
 Ġcond em
 Ġevery where
+? '
 Ġaff ili
 Ġf ought
 ": {"
@@ -9537,6 +9559,7 @@ m ax
 Ġw aves
 Ġt ap
 Ġcomprehens ive
+. --
 ĠR oy
 Ġfarm ers
 Rel ated
@@ -9552,6 +9575,7 @@ ron es
 Ġlegit imate
 m ate
 Ġcon vention
+, ,
 net ic
 ĠS D
 Ġconsist ently
@@ -9810,6 +9834,7 @@ G e
 Ġoper ator
 Ġhand ful
 Ġclass ified
+? )
 Ġdram atic
 Ġinvestig ators
 it o
@@ -10925,6 +10950,7 @@ ie v
 ĠBe ing
 o ft
 Ġadop t
+. :
 ] ;
 Wind ows
 Ġsatell ite
@@ -11812,6 +11838,7 @@ d ing
 Ġcou p
 b as
 Ġtermin al
+, -
 O H
 Ġt ension
 Ġw ings
@@ -11895,6 +11922,7 @@ ul k
 ĠA x
 Ġcru el
 Ġflo at
+. ),
 Ġfil ing
 ĠGr ant
 ĠB or
@@ -11910,6 +11938,7 @@ io x
 oy d
 B el
 ĠSt ew
+. (
 ah u
 ĠBe yond
 Ġout s
@@ -11954,6 +11983,7 @@ ah a
 âĢ ³
 Ġsh orter
 p iece
+> </
 Ġh orm
 ĠW at
 ĠBre ak
@@ -11961,6 +11991,7 @@ p iece
 Ġint ensity
 ĠAl an
 Ġli ability
+? !
 and ed
 Ġneigh bour
 ĠCol lection
@@ -13114,6 +13145,7 @@ s i
 Ġtext s
 Ġu gly
 Ġb io
+. âĢĶ
 ĠB ased
 Ġtr ains
 ĠW ing
@@ -13268,6 +13300,7 @@ m other
 ic ut
 bor ne
 ic iary
+. _
 ĠS U
 Ġpol ar
 is y
@@ -13389,6 +13422,7 @@ te ch
 Ġgrow s
 Ġmand atory
 Ġsusp icious
+! '
 A pr
 G reat
 Ġmort gage
@@ -14798,6 +14832,7 @@ o at
 S il
 r ants
 ĠC ris
+. ;
 ( {
 epend ence
 Ġrec y
@@ -15437,6 +15472,7 @@ T ra
 Ġloc ally
 Ġlast ing
 Ġhand y
+. ).
 P an
 ĠR ES
 Ind ex
@@ -15592,6 +15628,7 @@ us ions
 Ġen abling
 m ake
 T or
+. *
 | |
 ĠWe bsite
 ĠN PC
@@ -16497,6 +16534,7 @@ path y
 Ġalbum s
 ĠE asy
 Ġpist ol
+< <
 Ġ\ (
 t arget
 hel p
@@ -17119,6 +17157,7 @@ Met hod
 ok a
 Ġmal icious
 Ġste pping
+, [
 ĠD ad
 Ġatt raction
 ĠEffect s
@@ -19059,6 +19098,7 @@ ag le
 L im
 Ġche ek
 Ġj ealous
+- '
 Ġhar ness
 ĠPo ison
 Ġdis abilities
@@ -19232,6 +19272,7 @@ un c
 ä ½
 Ġl od
 Ġback ward
+- +
 ĠFor ward
 Ġth ri
 s ure
@@ -19273,6 +19314,7 @@ do ors
 p ound
 ĠC urt
 ." )
+. /
 Ġex emption
 end ix
 ĠM ull
@@ -19289,6 +19331,7 @@ d ates
 J oe
 ĠMar ines
 chn ology
+! ).
 Ġjud ged
 Ġwe ights
 R ay
@@ -20695,6 +20738,7 @@ c am
 Ġshut tle
 ĠR alph
 Ġh ometown
+- ,
 on al
 ĠB P
 å ı
@@ -20914,6 +20958,7 @@ Z E
 Ġsc ent
 Ġbe ard
 ĠR ut
+- "
 Ġpat ents
 H y
 Ġun just
@@ -21445,6 +21490,7 @@ reat ment
 vid ia
 T arget
 Pro perty
+? ,
 Ġf usion
 p ie
 ĠU CLA
@@ -22027,6 +22073,7 @@ App Data
 W il
 K O
 ĠCom edy
+> ,
 Ġpop ulated
 W D
 Ġp igs
@@ -22495,6 +22542,7 @@ ir rel
 health y
 I ron
 Ġreact ed
+- $
 25 2
 Ġpl ural
 Ġpl um
@@ -22526,6 +22574,7 @@ feed ing
 ĠM ao
 osp here
 Ġcont ests
+- |
 Ġf ren
 isp here
 R om
@@ -22551,6 +22600,7 @@ st re
 ens or
 Ġ18 5
 Ad v
+! ?
 ĠRe vel
 em ia
 ĠH ulk
@@ -24311,6 +24361,7 @@ o an
 ire ment
 M ade
 l oe
+> "
 c ats
 * .
 Ġgest ures
@@ -24798,6 +24849,7 @@ od ore
 Ġt asty
 Res earch
 ĠU ID
+- )
 Ġdivor ced
 ĠM U
 ĠHay es
@@ -25661,6 +25713,7 @@ d ream
 Ġstation ed
 opt ional
 ew orthy
+. </
 Ġundert aking
 Ġchick ens
 Ġstimul i
@@ -25723,6 +25776,7 @@ pat ient
 kins on
 M ont
 ig ible
+; "
 Ġperiod ically
 amm ad
 ĠBr itt
@@ -25979,6 +26033,7 @@ l ift
 A verage
 D IS
 Ġethnic ity
+! ),
 ĠNational s
 á ¹
 ĠT ah
@@ -26086,6 +26141,7 @@ Re ally
 ĠJud y
 Not ice
 ĠB ike
+? ]
 Ġrent ed
 st en
 Ġfore front
@@ -27201,6 +27257,7 @@ OT AL
 ĠAl ready
 ĠWheel er
 Ġexp ands
+? :
 Ġreconc iliation
 Ġpir ates
 Ġpur se
@@ -27798,6 +27855,7 @@ Ar g
 Ġafford ed
 Ġth a
 ĠJan et
+! --
 ĠNare ndra
 ĠPl ot
 H ol
@@ -27950,6 +28008,7 @@ H ell
 Ġ4 20
 ĠM AG
 ( _
+! ,
 t arians
 Ġrestrict ing
 rac use
@@ -28085,6 +28144,7 @@ ous se
 Ġhier arch
 out ine
 Ġwa velength
+> .
 ch id
 ĠProcess ing
 / +
@@ -29530,6 +29590,7 @@ Av ailability
 Ġsw elling
 ĠPers pect
 b ies
+. <
 ith metic
 ĠL ara
 Ġtempt ing
@@ -29547,6 +29608,7 @@ cl ad
 Ġnotor iously
 aku ya
 ier i
+? ).
 ĠW ent
 Ġsil icon
 Ġtre mb
@@ -30101,6 +30163,7 @@ serv ices
 R og
 Ġmillenn ials
 Ġinv ade
+- (
 Ġcomm issions
 ĠA uckland
 Ġbroadcast s
@@ -30503,6 +30566,7 @@ F ORE
 Ch at
 Ind ian
 ĠY ard
+? !"
 ĠP orts
 ĠX avier
 ĠR ET
@@ -30854,6 +30918,7 @@ s q
 l ass
 j et
 Ġdeb ating
+> :
 Ġe agle
 gr ades
 ĠD ixon
@@ -32213,6 +32278,7 @@ cig arettes
 Ġiron ically
 Ġcompassion ate
 ĠHaw kins
+. #
 ĠCat hedral
 Ġrall ied
 in ternal
@@ -32433,6 +32499,7 @@ on ica
 Ġstrongh old
 R F
 N M
+. >>
 Ġprosper ous
 Ġbo asted
 29 2
@@ -33600,6 +33667,7 @@ ort ment
 Count ry
 Ġpostp oned
 Ġunequ iv
+? ),
 ĠRo oney
 udd ing
 ĠLe ap
@@ -33669,6 +33737,7 @@ set ting
 N ULL
 ĠF avorite
 ĠS IG
+> (
 ĠSh iva
 ĠMay er
 Ġstorm ed
@@ -34181,6 +34250,7 @@ Int eg
 Ġè£ı è
 ĠMob ility
 ĠN ey
+- .
 b ilt
 L IN
 ĠT ube
@@ -34649,6 +34719,7 @@ U A
 oc ene
 ĠWilliam son
 s pr
+, âĢĶ
 ĠG F
 itt ens
 Be at
@@ -35051,6 +35122,7 @@ kay a
 W inter
 Ġstream ed
 50 7
+? ",
 Ġte ased
 Ġco efficient
 Ġwart ime
@@ -35422,6 +35494,7 @@ ap est
 ĠVari able
 br inging
 ĠL ORD
+, )
 Ġcollaps es
 x iety
 ĠN ed
@@ -36133,6 +36206,7 @@ imp osed
 wr ong
 bu querque
 D avis
+! ]
 Ġtim eless
 ĠNE ED
 Ġpestic ide
@@ -36606,6 +36680,7 @@ D ur
 ben ef
 Ġdst g
 ĠRy u
+> [
 Ġsq or
 S audi
 Ġis tg
@@ -36828,6 +36903,7 @@ c air
 c gi
 Med ical
 ĠAccount ability
+! !"
 oph ile
 Ġpsych otic
 ĠRest rict
@@ -37252,6 +37328,7 @@ cf g
 Th om
 Ġbad ges
 ĠBern stein
+. âĢĵ
 ĠP OP
 ĠCon j
 Ġinitial ization
@@ -37647,6 +37724,7 @@ b elt
 b idden
 Ġf ir
 m ist
+> ]
 Ġwe ave
 ĠParad ox
 Ġentr usted
@@ -38173,6 +38251,7 @@ P ain
 Ġrhet orical
 ĠPer cy
 ĠRw anda
+, .
 B ruce
 Ġtra umat
 ĠParliament ary
@@ -40334,6 +40413,7 @@ cs v
 le ck
 ĠWing ed
 ĠGrizz lies
+. ï¿½
 Ġne arer
 ĠSorce ress
 ĠInd igo
@@ -40417,6 +40497,7 @@ G il
 Ġredevelop ment
 ĠTown s
 ĠL ub
+! ",
 al on
 K rist
 Ġmeas urable
@@ -40453,6 +40534,7 @@ Set up
 Ġret ribution
 Ġd ues
 ĠM Ã¼
+. ?
 ä¸ Ń
 p ots
 Ġcame o
@@ -41964,6 +42046,7 @@ t ick
 ument hal
 Ġpatriarch al
 Ġcal c
+, ...
 Ġc out
 ĠGu an
 Ġpath ological
@@ -42380,6 +42463,7 @@ ex press
 Ġg rep
 ĠD iesel
 ĠGl ac
+! ?"
 Ġr m
 o ine
 disc rimination
@@ -42602,6 +42686,7 @@ VID EO
 P ull
 ĠH ust
 it ance
+? ãĢį
 ) --
 ĠPar allel
 con v
@@ -42837,6 +42922,7 @@ key es
 Ġlia ison
 EStream Frame
 ĠPl um
+! .
 Ġsp herical
 Ġper ished
 Ġbl ot
@@ -43391,6 +43477,8 @@ Miss ing
 Ġretire es
 Ġins idious
 el i
+> )
+. ãĢį
 Ġfinal ists
 ĠA ure
 Ġacc user
@@ -44043,6 +44131,7 @@ og i
 ĠD aryl
 Ġ# ##
 S ys
+. ,"
 Ġfree zes
 est ablishment
 and owski
@@ -44241,6 +44330,7 @@ AP S
 ĠHe ld
 Ġest ranged
 Ġ7 70
+. }
 ĠDun ham
 Ġsm okes
 Ġcap itals
@@ -46609,6 +46699,7 @@ N ature
 ver bal
 R PG
 Ġi ii
+; }
 0 28
 Ġhead lined
 Ġprim ed
@@ -47586,6 +47677,7 @@ ud i
 ĠNi Ã±o
 + =
 Ġpropag ate
+< ?
 Ġmethod ological
 204 39
 Ġtrig lycer
@@ -47733,6 +47825,7 @@ add on
 ĠH AM
 ĠFrie za
 W oman
+. $
 Ġc rib
 ĠHer od
 Ġtim ers
@@ -47870,6 +47963,7 @@ ag os
 Ġas piration
 ĠBrid gewater
 ": -
+! ".
 ĠEn s
 ĠCoc o
 P ie
@@ -48092,6 +48186,7 @@ im ize
 Ġarom atic
 u in
 end ish
+! /
 ĠB icycle
 ĠAS IC
 ile ged
@@ -48373,6 +48468,7 @@ Trans action
 u pe
 ĠHait ian
 57 2
+! :
 Ġunwitting ly
 iter ator
 sc roll
@@ -48793,6 +48889,7 @@ G rey
 ĠCH O
 ĠFOR M
 ĠAm trak
+- [
 Ġcr adle
 Ġantioxid ants
 ãģ®å ®

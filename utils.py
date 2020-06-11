@@ -25,27 +25,34 @@ def load_checkpoint(checkpoint_path, model, optimizer):
         optimizer.load_state_dict(state["optimizer"])
     print("model loaded from %s" % checkpoint_path)
 
+
 def validation_time(step, steps_eval, epoch, n_valid):
-    return  (step%steps_eval == 0 and epoch > 1 and step > 0) or (step+1==n_valid)
+    return (step % steps_eval == 0 and epoch > 1 and step > 0) or (step + 1 == n_valid)
+
 
 def sentiment_to_class(s):
-    if s == 'neutral':
+    if s == "neutral":
         return 1
-    if s == 'negative':
+    if s == "negative":
         return 0
-    if s == 'positive':
+    if s == "positive":
         return 2
 
-CONFIG = {'roberta-base': transformers.RobertaConfig.from_pretrained,
-           'roberta-large': transformers.RobertaConfig.from_pretrained,
-           'distilroberta-base': transformers.RobertaConfig.from_pretrained,
-           "roberta-base-openai-detector": transformers.RobertaConfig.from_pretrained,
-           "gpt2": transformers.GPT2Config.from_pretrained,
-           "gpt2-medium": transformers.GPT2Config.from_pretrained}
 
-MODELS = {'roberta-base': transformers.RobertaModel.from_pretrained,
-          'roberta-large': transformers.RobertaModel.from_pretrained,
-          'distilroberta-base': transformers.RobertaModel.from_pretrained,
-          "roberta-base-openai-detector": transformers.RobertaModel.from_pretrained,
-          "gpt2": transformers.GPT2Model.from_pretrained,
-          "gpt2-medium": transformers.GPT2Model.from_pretrained}
+CONFIG = {
+    "roberta-base": transformers.RobertaConfig.from_pretrained,
+    "roberta-large": transformers.RobertaConfig.from_pretrained,
+    "distilroberta-base": transformers.RobertaConfig.from_pretrained,
+    "roberta-base-openai-detector": transformers.RobertaConfig.from_pretrained,
+    "gpt2": transformers.GPT2Config.from_pretrained,
+    "gpt2-medium": transformers.GPT2Config.from_pretrained,
+}
+
+MODELS = {
+    "roberta-base": transformers.RobertaModel.from_pretrained,
+    "roberta-large": transformers.RobertaModel.from_pretrained,
+    "distilroberta-base": transformers.RobertaModel.from_pretrained,
+    "roberta-base-openai-detector": transformers.RobertaModel.from_pretrained,
+    "gpt2": transformers.GPT2Model.from_pretrained,
+    "gpt2-medium": transformers.GPT2Model.from_pretrained,
+}
